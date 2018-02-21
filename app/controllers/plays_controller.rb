@@ -4,6 +4,7 @@ class PlaysController < ApplicationController
   def create
     word = params[:word]
 
+    # extract into service poro
     @conn = Faraday.new(url: "https://od-api.oxforddictionaries.com/api/v1") do |faraday|
       faraday.headers["app_id"] = ENV["oxford_app_id"]
       faraday.headers["app_key"] = ENV["oxford_app_key"]
@@ -13,6 +14,7 @@ class PlaysController < ApplicationController
 
     response = @conn.get("inflections/en/#{word}")
 
+    # seperate into own method
     if response.status == 404
       redirect_to root_url
       flash[:error] = "'#{word}' is not a valid word."
