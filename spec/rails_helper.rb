@@ -8,8 +8,8 @@ require 'rspec/rails'
 require 'support/factory_bot'
 require 'support/database_cleaner'
 require 'pry'
-require 'vcr'
-require 'webmock/rspec'
+# require 'vcr'
+# require 'webmock/rspec'
 require 'simplecov'
 
 SimpleCov.start 'rails'
@@ -23,8 +23,8 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
 end
 
-VCR.configure do |config|
-  config.cassette_library_dir = "spec/cassettes"
-  config.hook_into :webmock
-  # config.filter_sensitive_data("<placeholer_text>") { ENV["api_key"]}
-end
+# VCR.configure do |config|
+#   config.cassette_library_dir = "spec/cassettes"
+#   config.hook_into :webmock
+#   # config.filter_sensitive_data("<placeholer_text>") { ENV["api_key"]}
+# end

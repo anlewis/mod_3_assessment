@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "welcome#index"
+  root "play#new"
 
-  resources :play, only: [:create]
+  resources :play, only: [:new, :create]
 end
