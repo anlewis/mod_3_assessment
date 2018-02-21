@@ -1,7 +1,7 @@
 class Api::V1::PlaysController < ApplicationController
   def create
     play = Play.create(user_id: params[:play][:user_id],
-                game_id: params[:game_id],
+                game: Game.find(params[:game_id]),
                 word: params[:play][:word]
                )
     if play.save

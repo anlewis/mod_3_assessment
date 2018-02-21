@@ -41,7 +41,7 @@ describe "Plays API" do
 
     play_params = { user_id: 1, word: "foxez" }
 
-    post "/api/v1/games/1/plays", params: { play: play_params }
+    post "/api/v1/games/#{game.id}/plays", params: { play: play_params }
 
     response_message = JSON.parse(response.body)
 

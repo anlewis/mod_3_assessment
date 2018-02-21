@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  root "play#new"
+  root "plays#new"
 
-  resources :play, only: [:new, :create]
+  resources :plays, only: [:new, :create]
 
   namespace :api do
     namespace :v1 do
