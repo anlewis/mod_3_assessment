@@ -5,9 +5,9 @@ class Api::V1::PlaysController < ApplicationController
                 word: params[:play][:word]
                )
     if play.save
-      render json: {"status": 201}.to_json
+      render json: {status: 201}.to_json
     else
-      render json: {"message": "foxez is not a valid word."}.to_json
+      render json: {message: "foxez is not a valid word."}.to_json
     end
   end
 end

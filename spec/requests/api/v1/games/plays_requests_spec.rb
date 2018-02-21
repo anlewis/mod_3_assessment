@@ -14,7 +14,7 @@ describe "Plays API" do
 
     play_params = { user_id: 1, word: "at" }
 
-    post "/api/v1/games/1/plays", params: { play: play_params }
+    post "/api/v1/games/#{game.id}/plays", params: { play: play_params }
     play = Play.last
 
     expect(response).to be_success
