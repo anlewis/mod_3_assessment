@@ -12,14 +12,16 @@ class PlayController < ApplicationController
     response = @conn.get("inflections/en/#{word}")
 
     if response.status == 404
-      flash[:success] = "#{word} is not a valid word."
+      redirect_to root_url
+      flash[:error] = "'#{word}' is not a valid word."
     else
       root = JSON.parse(response.body, symbolize_names: true)[:results]
         .first[:lexicalEntries]
         .first[:inflectionOf]
         .first[:text]
       Play.create(word: params[:word])
-      flash[:success] = "#{word} is a valid word and its root form is #{root}."
+      redirect_to root_url
+      flash[:success] = "'#{word}' is a valid word and its root form is '#{root}'."
     end
   end
 end
