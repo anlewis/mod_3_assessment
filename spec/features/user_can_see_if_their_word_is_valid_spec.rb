@@ -4,6 +4,7 @@ feature 'A user sees if a word is vaild or not' do
 
   before(:each) do
     visit '/'
+    save_and_open_page
   end
 
   describe 'a valid word' do

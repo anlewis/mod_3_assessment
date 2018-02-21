@@ -12,6 +12,10 @@ class Play < ApplicationRecord
     }
   end
 
+  # def create
+  #   binding.pry
+  # end
+
   private
 
     def score_word
