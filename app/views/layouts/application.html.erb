@@ -15,7 +15,9 @@
         <%= link_to "ScrabbleWeb", root_url %>
       </div>
     </nav>
-
+    <% flash.each do |name, msg| %>
+      <%= content_tag :div, raw(msg), class: name %>
+    <% end %>
     <%= yield %>
   </body>
 </html>

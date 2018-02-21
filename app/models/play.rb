@@ -15,5 +15,12 @@ class Play < ApplicationRecord
   private
 
     def score_word
+      self.score = word.upcase.split("").map do |char|
+        letter_scores[char]
+      end.sum
+    end
+
+    def is_real_word
+      # extract code from plays_controller to model level so that we can validate word before creating a play
     end
 end
