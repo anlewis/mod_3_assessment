@@ -2,15 +2,15 @@ class Api::V1::PlaysController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:create]
 
   def create
-    word = params[:play][:word]
-
+    word = params[:word]
     if OxfordService.new.validate_word(word)
       Play.create(user_id: params[:play][:user_id],
                 game: Game.find(params[:game_id]),
-                word: params[:play][:word]
+                word: word
                )
+      render json: {message: "you've played the word: #{word}!"}.to_json
     else
-      render json: {message: "foxez is not a valid word."}.to_json
+      render json: {message: "#{word} is not a valid word."}.to_json
     end
   end
 end

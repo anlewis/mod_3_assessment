@@ -3,10 +3,6 @@ class GameSerializer < ActiveModel::Serializer
 
   def scores
     user_scores = object.plays.group(:user_id).sum(:score)
-    scores = []
-    user_scores.each do |user_id, score|
-      scores << {"user_id":user_id, "score":score}
-    end
-    scores
+    user_scores.to_a.map { |user_id, score| { user_id: user_id, score: score } }
   end
 end
