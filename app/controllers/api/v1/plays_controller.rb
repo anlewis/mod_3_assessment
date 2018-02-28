@@ -3,8 +3,9 @@ class Api::V1::PlaysController < ApplicationController
 
   def create
     word = params[:word]
+
     if OxfordService.new.validate_word(word)
-      Play.create(user_id: params[:play][:user_id],
+      Play.create(user_id: params[:user_id],
                 game: Game.find(params[:game_id]),
                 word: word
                )
