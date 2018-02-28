@@ -1,4 +1,6 @@
 class Api::V1::PlaysController < ApplicationController
+  skip_before_action :verify_authenticity_token, only: [:create]
+
   def create
     word = params[:play][:word]
 
@@ -7,7 +9,6 @@ class Api::V1::PlaysController < ApplicationController
                 game: Game.find(params[:game_id]),
                 word: params[:play][:word]
                )
-      render json: {status: 201}.to_json
     else
       render json: {message: "foxez is not a valid word."}.to_json
     end
