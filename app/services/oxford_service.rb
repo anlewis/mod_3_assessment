@@ -9,11 +9,11 @@ class OxfordService
   end
 
   def make_play(word)
-    response = @conn.get("inflections/en/#{word}")
+    find_root(word_response(word)) if validate_word(word)
+  end
 
-    if valid_word?(response)
-      find_root(response)
-    end
+  def validate_word(word)
+    valid_word?(word_response(word))
   end
 
   private
@@ -21,6 +21,10 @@ class OxfordService
 
     def valid_word?(response)
       response.status == 200
+    end
+
+    def word_response(word)
+      @conn.get("inflections/en/#{word}")
     end
 
     def find_root(response)

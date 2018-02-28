@@ -20,7 +20,7 @@ describe "Plays API" do
     expect(response).to be_success
     expect(play.word).to eq play_params[:word]
 
-    get "/api/v1/games/1"
+    get "/api/v1/games/#{game.id}"
 
     game_response = JSON.parse(response.body)
 
