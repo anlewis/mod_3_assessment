@@ -14,16 +14,17 @@ describe "Plays API" do
 
     play_params = { user_id: 1, word: "at" }
 
-    post "/api/v1/games/#{game.id}/plays", params: { play: play_params }
+    post "/api/v1/games/#{game.id}/plays", params: play_params
     play = Play.last
 
     expect(response).to be_success
     expect(play.word).to eq play_params[:word]
 
-    get "/api/v1/games/1"
+    get "/api/v1/games/#{game.id}"
 
     game_response = JSON.parse(response.body)
 
+    expect(response.status).to eq 200
     expect(game_response["scores"].first["user_id"]).to eq 1
     expect(game_response["scores"].first["score"]).to eq 17
   end
@@ -41,7 +42,7 @@ describe "Plays API" do
 
     play_params = { user_id: 1, word: "foxez" }
 
-    post "/api/v1/games/#{game.id}/plays", params: { play: play_params }
+    post "/api/v1/games/#{game.id}/plays", params: play_params
 
     response_message = JSON.parse(response.body)
 

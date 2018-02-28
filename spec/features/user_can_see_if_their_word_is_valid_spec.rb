@@ -10,7 +10,7 @@ feature 'A user sees if a word is vaild or not' do
     it "returns that the word is valid and the root form" do
       page.fill_in 'Word', with: 'foxes'
       click_on 'Validate Word'
-
+      # save_and_open_page
       expect(page).to have_content "'foxes' is a valid word and its root form is 'fox'."
     end
   end

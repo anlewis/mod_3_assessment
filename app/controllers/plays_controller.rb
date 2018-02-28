@@ -3,29 +3,15 @@ class PlaysController < ApplicationController
 
   def create
     word = params[:word]
+    root = OxfordService.new.make_play(word)
 
-    # extract into service poro
-    @conn = Faraday.new(url: "https://od-api.oxforddictionaries.com/api/v1") do |faraday|
-      faraday.headers["app_id"] = ENV["oxford_app_id"]
-      faraday.headers["app_key"] = ENV["oxford_app_key"]
-      faraday.headers["Accept"] = "application/json"
-      faraday.adapter Faraday.default_adapter
-    end
-
-    response = @conn.get("inflections/en/#{word}")
-
-    # seperate into own method
-    if response.status == 404
-      redirect_to root_url
-      flash[:error] = "'#{word}' is not a valid word."
-    else
-      root = JSON.parse(response.body, symbolize_names: true)[:results]
-        .first[:lexicalEntries]
-        .first[:inflectionOf]
-        .first[:text]
+    if root
       Play.create(word: params[:word])
-      redirect_to root_url
       flash[:success] = "'#{word}' is a valid word and its root form is '#{root}'."
+    else
+      flash[:error] = "'#{word}' is not a valid word."
     end
+
+    redirect_to root_url
   end
 end
